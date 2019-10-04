@@ -38,32 +38,37 @@ echo Running all tests..."\n\n
 # Check pass/fail
 #checkResult
 
-# LAB2_PART1
+# LAB2_PART2
 
-test “PINA1: 0, PINA0: 0 => PORTB0: 0x00”
-setPINA 0x00
+test “PORTA: 0x0F (all full) => PORTC: 0x00”
+setPINA 0x0F
 continue 5
-expectPORTB 0x00
+expectPORTC 0x00
 checkResult
 
-test “PINA1: 0, PINA0: 1 => PORTB0: 0x01”
+test “PORTA: 0x0E (one avail) => PORTC: 0x01”
+setPINA 0x0E
+continue 5
+expectPORTC 0x01
+checkResult
+
+test “PORTA: 0x0C (two avail) => PORTC: 0x02”
+setPINA 0x0C
+continue 5
+expectPORTB 0x02
+checkResult
+
+test “PORTA: 0x08 (three avail) => PORTC: 0x03”
+setPINA 0x08
+continue 5
+expectPORTB 0x03
+checkResult
+
+test “PORTA: 0x01 (four avail) => PORTC: 0x04”
 setPINA 0x01
 continue 5
-expectPORTB 0x01
+expectPORTB 0x04
 checkResult
-
-test “PINA1: 1, PINA0: 0 => PORTB0: 0x00”
-setPINA 0x02
-continue 5
-expectPORTB 0x00
-checkResult
-
-test “PINA1: 1, PINA0: 1 => PORTB0: 0x00”
-setPINA 0x03
-continue 5
-expectPORTB 0x00
-checkResult
-
 
 # Report on how many tests passed/tests ran
 set $passed=$tests-$failed
