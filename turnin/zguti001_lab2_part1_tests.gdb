@@ -38,7 +38,7 @@ echo Running all tests..."\n\n
 # Check pass/fail
 #checkResult
 
-# LAB2_PART1
+# LAB2_PART1 ========== GARAGEDOOR/LIGHT TESTS
 
 test “PINA1: 0, PINA0: 0 => PORTB0: 0x00”
 setPINA 0x00

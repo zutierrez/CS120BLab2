@@ -1,8 +1,8 @@
-/*	Author: zguti001
+/*	Author: Zion Gutierrez, zguti001
  *  Partner(s) Name: none
- *	Lab Section:
- *	Assignment: Lab #  Exercise #
- *	Exercise Description: [optional - include for your own benefit]
+ *	Lab Section: 023
+ *	Assignment: Lab #2  Exercise #1
+ *	Exercise Description: Garage Door/ Light
  *
  *	I acknowledge all content contained herein, excluding template or example
  *	code, is my own original work.
