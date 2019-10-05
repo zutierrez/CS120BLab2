@@ -1,10 +1,8 @@
-Breakpoint 1 at 0xea: file source/main.c, line 27.
+Breakpoint 1 at 0xf4: file source/main.c, line 29.
 Note: automatically using hardware breakpoints for read-only addresses.
 ======================================================
 Running all tests..."
 
-“PORTA:...
-	Expected 0x80 
-	PORTC '0x800028:	0x80
-“PORTA:...“PORTA:...“PORTA:...“PORTA:...======================================================
+test/tests.gdb:44: Error in sourced command file:
+user defined function may only have 10 arguments.
 Quitting: Remote doesn't know how to detach
