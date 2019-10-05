@@ -1,8 +1,8 @@
 /*	Author: Zion Gutierrez, zguti001
  *  Partner(s) Name: none
  *	Lab Section: 023
- *	Assignment: Lab #2  Exercise #2
- *	Exercise Description: Parking Spot Available Counter
+ *	Assignment: Lab #2  Exercise #3
+ *	Exercise Description: Parking Spot Available Counter + Flag for Lot Full
  *
  *	I acknowledge all content contained herein, excluding template or example
  *	code, is my own original work.
@@ -39,10 +39,12 @@ int main(void) {
 	if( spot1  == 0 ){
 		cntavail = cntavail + 1;}
 
-	outputC = cntavail;
-
 	// 3) Write output
-        PORTC = outputC;
+        if(cntavail == 0x00){
+		cntavail = cntavail | 0x80;}
+        
+        outputC = cntavail;
+	PORTC = outputC;
 	cntavail = 0x00;	
     }
 

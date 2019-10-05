@@ -1,50 +1,76 @@
-/*	Author: Zion Gutierrez, zguti001
- *  Partner(s) Name: none
- *	Lab Section: 023
- *	Assignment: Lab #2  Exercise #2
- *	Exercise Description: Parking Spot Available Counter
- *
- *	I acknowledge all content contained herein, excluding template or example
- *	code, is my own original work.
- */
-#include <avr/io.h>
-#ifdef _SIMULATE_
-#include "simAVRHeader.h"
-#endif
+# Test file for Lab2_introToAVR
 
-#define spot4 (PINA & 0x08) >> 3
-#define spot3 (PINA & 0x04) >> 2
-#define spot2 (PINA & 0x02) >> 1
-#define spot1 (PINA & 0x01) >> 0
 
-int main(void) {
-        DDRA = 0x00; PORTA = 0xFF; // Configure port A's 8 pins as inputs
-	DDRB = 0xFF; PORTC = 0x00; // Configure port B's 8 pins as outputs, initialize to 0s
-	//unsigned char inputA = 0x00; // Temp (PORTA, bits represent spaces)
-    	unsigned char cntavail = 0x00; //Temp (PORTC, amount of empty spaces)
-        unsigned char outputC = 0x00;
+# commands.gdb provides the following functions for ease:
+#   test "<message>"
+#       Where <message> is the message to print. Must call this at the beginning of every test
+#       Example: test "PINA: 0x00 => expect PORTC: 0x01"
+#   checkResult
+#       Verify if the test passed or failed. Prints "passed." or "failed." accordingly, 
+#       Must call this at the end of every test.
+#   expectPORTx <val>
+#       With x as the port (A,B,C,D)
+#       The value the port is epected to have. If not it will print the erroneous actual value
+#   setPINx <val>
+#       With x as the port or pin (A,B,C,D)
+#       The value to set the pin to (can be decimal or hexidecimal
+#       Example: setPINA 0x01
+#   printPORTx f OR printPINx f 
+#       With x as the port or pin (A,B,C,D)
+#       With f as a format option which can be: [d] decimal, [x] hexadecmial (default), [t] binary 
+#       Example: printPORTC d
+#   printDDRx
+#       With x as the DDR (A,B,C,D)
+#       Example: printDDRB
 
-	while (1) {
-	// Input
+echo ======================================================\n
+echo Running all tests..."\n\n
 
-	if( spot4 == 0 ){
-		cntavail = cntavail + 1; }
-	
-	if( spot3 == 0 ){
-		cntavail = cntavail + 1;}
-	
-	if( spot2 == 0 ){
-		cntavail = cntavail + 1;}
-	
-	if( spot1  == 0 ){
-		cntavail = cntavail + 1;}
+# Example test:
+#test "PINA1: 0x00, PINA0: 0x00 => PORTB0: 0"
+# Set inputs
+#setPINA 0x00
+#setPINB 0x00
+# Continue for several ticks
+#continue 2
+# Set expect values
+#expectPORTC 0
+# Check pass/fail
+#checkResult
 
-	outputC = cntavail;
+# LAB2_PART2 ===== TESTCASE for PARKINGSPACECNTR + FLAG FOR FULL LOT
 
-	// 3) Write output
-        PORTC = outputC;
-	cntavail = 0x00;	
-    }
+test “PORTA: 0x0F (all full) => PORTC: 0x80”
+setPINA 0x0F
+continue 5
+expectPORTC 0x80
+checkResult
 
-    return 1;
-}
+test “PORTA: 0x0E (one avail) => PORTC: 0x01”
+setPINA 0x0E
+continue 5
+expectPORTC 0x01
+checkResult
+
+test “PORTA: 0x0C (two avail) => PORTC: 0x02”
+setPINA 0x0C
+continue 5
+expectPORTC 0x02
+checkResult
+
+test “PORTA: 0x08 (three avail) => PORTC: 0x03”
+setPINA 0x08
+continue 5
+expectPORTC 0x03
+checkResult
+
+test “PORTA: 0x00 (four avail) => PORTC: 0x04”
+setPINA 0x00
+continue 5
+expectPORTC 0x04
+checkResult
+
+# Report on how many tests passed/tests ran
+set $passed=$tests-$failed
+eval "shell echo Passed %d/%d tests.\n",$passed,$tests
+echo ======================================================\n

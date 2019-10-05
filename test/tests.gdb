@@ -38,12 +38,12 @@ echo Running all tests..."\n\n
 # Check pass/fail
 #checkResult
 
-# LAB2_PART2 ===== TESTCASE for PARKINGSPACECOUNTER
+# LAB2_PART2 ===== TESTCASE for PARKINGSPACECNTR + FLAG FOR FULL LOT
 
-test “PORTA: 0x0F (all full) => PORTC: 0x00”
+test “PORTA: 0x0F (all full) => PORTC: 0x80”
 setPINA 0x0F
 continue 5
-expectPORTC 0x00
+expectPORTC 0x80
 checkResult
 
 test “PORTA: 0x0E (one avail) => PORTC: 0x01”

@@ -3,5 +3,8 @@ Note: automatically using hardware breakpoints for read-only addresses.
 ======================================================
 Running all tests..."
 
-“PORTA:...“PORTA:...“PORTA:...“PORTA:...“PORTA:...======================================================
+“PORTA:...
+	Expected 0x80 
+	PORTC '0x800028:	0x80
+“PORTA:...“PORTA:...“PORTA:...“PORTA:...======================================================
 Quitting: Remote doesn't know how to detach
